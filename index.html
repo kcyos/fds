@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freedom Debt Consulting - Get Debt Free in 60 Months</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon2.jpg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles & Animations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #444;
+            background-color: #f0f4f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        /* --- IMPROVED: Falling Chains Animation --- */
+        .falling-chain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .chain-link {
+            position: absolute;
+            font-size: 4rem;
+            color: #ffffff;
+            opacity: 0;
+            animation: fall 8s linear infinite; /* Shorter duration for quicker flow */
+            will-change: transform, opacity; 
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1; /* Fade in quickly */
+            }
+            90% {
+                opacity: 0.1; /* Stay visible for most of the animation */
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Adjusted delays and durations for a consistent cascade */
+        .chain-link:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 9s; /* Varying durations for a less uniform look */
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .chain-link:nth-child(2) {
+            left: 25%;
+            animation-delay: 2s;
+            animation-duration: 8s;
+            color: rgba(255, 255, 255, 0.234);
+        }
+        .chain-link:nth-child(3) {
+            left: 40%;
+            animation-delay: 4s;
+            animation-duration: 7s;
+            color: rgba(255, 255, 255, 0.604);
+        }
+        .chain-link:nth-child(4) {
+            left: 55%;
+            animation-delay: 6s;
+            animation-duration: 9s;
+            color: rgba(255, 255, 255, 0.333);
+        }
+        .chain-link:nth-child(5) {
+            left: 70%;
+            animation-delay: 8s;
+            animation-duration: 8.5s;
+            color: rgba(255, 255, 255, 0.601);
+        }
+        .chain-link:nth-child(6) {
+            left: 85%;
+            animation-delay: 10s;
+            animation-duration: 7.5s;
+            color: rgba(255, 255, 255, 0.823);
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Hamburger to X animation */
+        .nav-toggle .fa-bars {
+            transform: rotate(0deg);
+            opacity: 1;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle.active .fa-bars {
+            transform: rotate(90deg);
+            opacity: 0;
+            position: absolute;
+        }
+
+        .nav-toggle .fa-xmark {
+            transform: rotate(-90deg);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle.active .fa-xmark {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(30,60,114,0.9), rgba(42,82,152,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><circle fill="%23e1ecf4" cx="200" cy="150" r="80"/><circle fill="%23d1e7dd" cx="800" cy="300" r="120"/><circle fill="%23fff3cd" cx="1000" cy="100" r="60"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #1e3c72;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.3);
+            animation: none; /* Stop pulse on hover */
+        }
+        
+        .cta-button.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* --- Sections & Components --- */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .form-section { background: #f8f9fa; }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e3c72;
+            font-size: 2rem;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(30, 60, 114, 0.2);
+        }
+
+                /* --- Tabs --- */
+        .tabs-section { background: white; }
+        .tabs-container { max-width: 1000px; margin: 0 auto; }
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #e1e1e1;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .tab-button.active {
+            color: #1e3c72;
+            border-bottom-color: #ffd700;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { 
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content h3 { color: #1e3c72; margin-bottom: 20px; font-size: 1.8rem; text-align: center; }
+        .tab-content p { margin-bottom: 15px; font-size: 1.1rem; line-height: 1.8; }
+        
+        /* --- FAQ --- */
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .faq-item:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+        .faq-question {
+            background: #1e3c72;
+            color: white;
+            padding: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+        .faq-question:hover { background: #2a5298; }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .faq-answer.active {
+            max-height: 500px; /* A large value for the transition */
+            padding: 20px;
+        }
+
+        /* --- Benefits Card Flip Animation --- */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .benefit-card-container {
+            background-color: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+        }
+        .benefit-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .benefit-card-container.is-flipped .benefit-card-inner {
+            transform: rotateY(180deg);
+        }
+        .benefit-card-front, .benefit-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .benefit-card-back {
+            transform: rotateY(180deg);
+        }
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(30, 60, 114, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .benefit-icon:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ffd700, #ffd700);
+            box-shadow: 0 8px 15px rgba(30, 60, 114, 0.4);
+        }
+        .benefit-card-front h4, .benefit-card-back h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        .benefit-card-front p, .benefit-card-back p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* --- Reviews Section --- */
+        .reviews-section {
+            text-align: center;
+            background: #f8f9fa;
+        }
+        .reviews-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .rating-summary {
+            margin-bottom: 30px;
+        }
+        .rating-summary .stars i {
+            color: #ffd700;
+            font-size: 2rem;
+            margin: 0 5px;
+        }
+        .rating-summary h3 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+        .counters {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .counter-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            padding: 10px;
+        }
+        .counter-item .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2a5298;
+        }
+        .counter-item p {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .toggle-comments-btn {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .toggle-comments-btn:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+        }
+        .comments-section {
+            text-align: left;
+            margin-top: 30px;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+        }
+        .comments-section h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .comment-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .comment-item p {
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        .footer-section a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+                position: relative; /* Needed for the X icon positioning */
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100%;
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                transition: right 0.5s ease-in-out;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+            }
+
+            .hero { padding-top: 120px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1.1rem; }
+
+            .tabs-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            .tab-button {
+                border-bottom: none;
+                border-radius: 5px;
+                background: #f8f9fa;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            .tab-button.active {
+                background: #1e3c72;
+                color: white;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="falling-chain">
+           <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+            <i class="fas fa-link chain-link"></i>
+        </div>
+        <nav class="container">
+            <div class="logo" style="display:flex; align-items:center; gap:10px;">
+                <img src="fdslogo.png" alt="Freedom Debt Consulting Logo" style="height:60px; width:auto;">
+                <span style="font-size:30px; font-weight:bold;">FREEDOM DEBT CONSULTING</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#our-services" data-tab-link="who-we-are">OUR SERVICES & INFORMATION</a></li>
+                <li><a href="#reviews">REVIEWS</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-xmark"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" 
+        style="background:url('fdsbg.png') no-repeat center 30%; 
+            background-size:cover; 
+            min-height:100vh; 
+            display:flex; 
+            align-items:center; 
+            justify-content:center; 
+            text-align:center; 
+            color:#fff; 
+            padding:40px;">
+        <div class="container hero-content fade-in">
+            <h1>Do you pay too much on your debt?</h1>
+            <p>Find out with Freedom Debt Consulting how much cash flow you can unlock and save. Get debt free in 60 months or less!</p>
+            <a href="#contact" class="cta-button pulse">Start Your Debt Free Journey Now</a>
+        </div>
+    </section>
+
+    <section id="contact" class="form-section">
+        <div class="container fade-in">
+            <h2 class="section-title">Start Your Debt Free Journey</h2>
+            <div class="form-container fade-in">
+                <form id="debtForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Surname:</label>
+                        <input type="text" id="surname" name="surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Number:</label>
+                        <input type="tel" id="contact" name="contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id-number">Identification Number:</label>
+                        <input type="text" id="id-number" name="id-number" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Call Me</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section id="our-services" class="tabs-section">
+            <div class="container fade-in">
+                <h2 class="section-title">Our Services & Information</h2>
+                <div class="tabs-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="benefits">BENEFITS</button>
+                        <button class="tab-button" data-tab="fees">FEES</button>
+                        <button class="tab-button" data-tab="faqs">FAQS</button> 
+                        <button class="tab-button" data-tab="who-we-are">WHO ARE WE</button>
+                    </div>
+
+                    <div id="benefits" class="tab-content active">
+                        <h3>Benefits of Debt Counselling</h3>
+                        <div class="benefits-grid">
+                            <!-- Card 1: Interest Rates -->
+                            <div class="benefit-card-container">
+                                <div class="benefit-card-inner">
+                                    <div class="benefit-card-front">
+                                        <div class="benefit-icon"><i class="fas fa-snowflake"></i></div>
+                                        <h4>Interest Rates Are Frozen</h4>
+                                        <p>Your creditors are no longer allowed to charge you additional interest or fees on your existing debts. This is a significant benefit of debt counselling.</p>
+                                    </div>
+                                    <div class="benefit-card-back">
+                                        <div class="benefit-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                                        <h4>Save On Interest</h4>
+                                        <p>We implement debt review ethically. With an acceptable repayment plan, we get reduced rates for you to save on interest charged by banks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2: Payments -->
+                            <div class="benefit-card-container">
+                                <div class="benefit-card-inner">
+                                    <div class="benefit-card-front">
+                                        <div class="benefit-icon"><i class="fas fa-chart-pie"></i></div>
+                                        <h4>Payments Are Restructured</h4>
+                                        <p>Your monthly debt repayments are restructured into one affordable payment based on your current financial situation, ensuring you can meet living expenses.</p>
+                                    </div>
+                                    <div class="benefit-card-back">
+                                        <div class="benefit-icon"><i class="fas fa-circle-plus"></i></div>
+                                        <h4>Avoid More Debt</h4>
+                                        <p>Because repayments are adjusted to your budget, you won’t have to rely on more credit to cover shortfalls. This prevents the risk of your debt growing.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3: Legal Protection -->
+                            <div class="benefit-card-container">
+                                <div class="benefit-card-inner">
+                                    <div class="benefit-card-front">
+                                        <div class="benefit-icon"><i class="fas fa-shield"></i></div>
+                                        <h4>Legal Protection</h4>
+                                        <p>Once under debt counselling, creditors cannot take legal action against you or repossess your assets. This protects you from a worse financial situation.</p>
+                                    </div>
+                                    <div class="benefit-card-back">
+                                        <div class="benefit-icon"><i class="fas fa-bullseye"></i></div>
+                                        <h4>Become Debt-Free</h4>
+                                        <p>As long as you adhere to the payment plan, your debt will not grow, and you can focus on working towards becoming debt-free without creditor harassment.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 20px; text-align: center; font-size: 1.5rem;">How to Apply:</h4>
+                            <p style="text-align: center;">Freedom Debt Consulting operates from Monday to Friday. A formal face-to-face interview is not required. You can contact us by phone or email. This ensures the process is conducted quickly and conveniently, saving you time and money.</p>
+                        </div>
+                    </div>
+
+                    <div id="who-we-are" class="tab-content">
+                        <h3>Who Are We</h3>
+                        <p>We help South Africans get on a debt free path. We review your finances and help you with a realistic budget by calculating an estimated monthly debt instalment to unlock more cash for your living expenses and allow you to save.</p>
+                        <p>We negotiate with your credit providers to get your interest rates reduced which also decreases summons and judgements against you, protecting you from bankruptcy. Our aim is to help you become debt free in 60 months or less so you can have a fresh start.</p>
+                    </div>
+
+                    <div id="faqs" class="tab-content">
+                        <h3>Frequently Asked Questions</h3>
+                        <div class="faq-item">
+                            <div class="faq-question">Will my information be sent to the credit bureaus?</div>
+                            <div class="faq-answer">
+                                <p>When you apply for debt counselling, the process involves notifying both credit bureaus and your credit providers. This ensures your credit profile reflects your status as a consumer undergoing debt counselling. While this may temporarily affect your ability to obtain new credit, it also prevents creditors from taking legal action against you.</p>
+                            </div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question">Can I apply for more credit while under debt review?</div>
+                            <div class="faq-answer">
+                                <p>No, while you're under debt review, you cannot apply for more credit. This is a condition of the National Credit Act for your own protection, helping you focus on paying off existing debt.</p>
+                            </div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question">What if my credit providers contact me?</div>
+                            <div class="faq-answer">
+                                <p>Remain calm and explain that you have applied for debt review. Provide them with your debt counsellor's contact details so they can get in touch directly.</p>
+                            </div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question">Can I still rent a property?</div>
+                            <div class="faq-answer">
+                                <p>Yes, you can still rent property. Debt review is not a credit agreement. Your debt counsellor can provide your landlord with proof that you are being financially responsible.</p>
+                            </div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question">Do debt review clients go to court?</div>
+                            <div class="faq-answer">
+                                <p>In most cases, you will not have to appear in court. Your case appears before the Magistrates Court or the National Consumers Tribunal, but most clients don't need to go to court personally.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="fees" class="tab-content">
+                        <h3>Why Must Fees Be Paid?</h3>
+                        <p>Debt review fees are paid to debt counsellors for their professional services. These fees are essential and regulated by the National Credit Regulator (NCR). Debt counsellors are qualified professionals who guide you through the process and negotiate with creditors on your behalf.</p>
+                        <h4 style="color: #1e3c72; margin: 30px 0 20px 0;">Fee Structure:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Restructuring Fee:</strong> Once-off fee of 100% of your debt rehabilitation amount (up to NCR maximum)</li>
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Application Fee:</strong> Once-off application processing fee</li>
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Administration Fee:</strong> Once-off administration fee as per NCR guidelines</li>
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Sundry Fee:</strong> Legal application fee to NCT or Magistrate Court</li>
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Monthly Aftercare Fee:</strong> Monthly fee for ongoing debt rehabilitation support</li>
+                            <li style="padding: 10px; background: white; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1e3c72;"><strong>Payment Distribution Fee (PDA):</strong> Monthly transactional fee as per NCR</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </section>
+    
+    ---
+
+    <section id="reviews" class="reviews-section">
+        <div class="container fade-in">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="reviews-container">
+                <div class="rating-summary">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h3>4.8 out of 5 stars</h3>
+                </div>
+                <div class="counters">
+                    <div class="counter-item">
+                        <span class="counter" data-target="1500">0</span>+
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter" data-target="950">0</span>+
+                        <p>5-Star Reviews</p>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter" data-target="1200">0</span>+
+                        <p>Total Reviews</p>
+                    </div>
+                </div>
+                <button class="toggle-comments-btn">Show Customer Comments</button>
+                <div class="comments-section" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>Phone: [Contact Number]</p>
+                    <p>Email: [Email Address]</p>
+                    <p>Operating Hours: Monday - Friday</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <p>Debt Review & Counselling</p>
+                    <p>Budget Planning</p>
+                    <p>Credit Provider Negotiations</p>
+                    <p>Legal Protection</p>
+                </div>
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>We are registered debt counsellors helping South Africans achieve financial freedom through professional debt review services.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Freedom Debt Consulting. All rights reserved. Registered with the National Credit Regulator (NCR).</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Nav Toggle and Close on Click ---
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+            });
+
+            // --- Intersection Observer for Fade-In Animation ---
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.2,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // --- Tab Functionality ---
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // --- Benefit Card Flip Functionality ---
+            const cardContainers = document.querySelectorAll('.benefit-card-container');
+            cardContainers.forEach(container => {
+                const icons = container.querySelectorAll('.benefit-icon');
+                icons.forEach(icon => {
+                    icon.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        container.classList.toggle('is-flipped');
+                    });
+                });
+            });
+
+            // --- FAQ Accordion Functionality ---
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const currentlyActiveQuestion = document.querySelector('.faq-question.active');
+                    const currentlyActiveAnswer = document.querySelector('.faq-answer.active');
+
+                    // Close the currently open FAQ if it's not the one being clicked
+                    if (currentlyActiveQuestion && currentlyActiveQuestion !== question) {
+                        currentlyActiveQuestion.classList.remove('active');
+                        currentlyActiveAnswer.classList.remove('active');
+                    }
+
+                    // Toggle the clicked FAQ
+                    question.classList.toggle('active');
+                    answer.classList.toggle('active');
+                });
+            });
+        });
+
+    // --- Reviews Toggle Functionality ---
+    const toggleCommentsBtn = document.querySelector('.toggle-comments-btn');
+    const commentsSection = document.querySelector('.comments-section');
+
+    toggleCommentsBtn.addEventListener('click', () => {
+        if (commentsSection.style.display === 'none') {
+            commentsSection.style.display = 'block';
+            toggleCommentsBtn.textContent = 'Hide Customer Comments';
+            // Placeholder for comments (you would fetch these from a database)
+            commentsSection.innerHTML = `
+                <h4>Recent Comments</h4>
+                <div class="comment-item">
+                    <p>"I was drowning in debt until I found Freedom Debt Consulting. They were professional, kind, and helped me get my life back on track. Highly recommend!" - Jane D.</p>
+                </div>
+                <div class="comment-item">
+                    <p>"The best decision I've ever made. The process was so easy, and I feel so much lighter knowing my finances are under control. Thank you!" - John P.</p>
+                </div>
+            `;
+        } else {
+            commentsSection.style.display = 'none';
+            toggleCommentsBtn.textContent = 'Show Customer Comments';
+        }
+    });
+
+    // --- Counter Animation ---
+    const counters = document.querySelectorAll('.counter');
+    const counterOptions = {
+        threshold: 0.5
+    };
+
+    const runCounters = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.dataset.target, 10);
+                let count = 0;
+                const duration = 2000; // milliseconds
+                const step = target / (duration / 10);
+
+                const timer = setInterval(() => {
+                    count += step;
+                    if (count >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.ceil(count);
+                    }
+                }, 10);
+                observer.unobserve(counter);
+            }
+        });
+    }, counterOptions);
+
+    counters.forEach(counter => {
+        runCounters.observe(counter);
+    });
+</script>
+</body>
+</html>
