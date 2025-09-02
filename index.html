@@ -54,7 +54,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
 
-        /* --- IMPROVED: Falling Chains Animation --- */
+        /* --- Falling Chains with Independent Rotation + Random Positions --- */
         .falling-chain {
             position: absolute;
             width: 100%;
@@ -70,64 +70,76 @@
             font-size: 4rem;
             color: #ffffff;
             opacity: 0;
-            animation: fall 8s linear infinite; /* Shorter duration for quicker flow */
-            will-change: transform, opacity; 
+            will-change: transform, opacity;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.1; /* Fade in quickly */
-            }
-            90% {
-                opacity: 0.1; /* Stay visible for most of the animation */
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px)) rotate(360deg);
-                opacity: 0;
-            }
+        /* --- Multiple rotation patterns --- */
+        @keyframes fall-cw {
+            0%   { transform: translateY(-120px) rotate(0deg) scale(1); opacity: 0; }
+            10%  { opacity: 0.3; }
+            50%  { opacity: 0.2; }
+            100% { transform: translateY(calc(100vh + 120px)) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        /* Adjusted delays and durations for a consistent cascade */
+        @keyframes fall-ccw {
+            0%   { transform: translateY(-120px) rotate(0deg) scale(1); opacity: 0; }
+            10%  { opacity: 0.3; }
+            50%  { opacity: 0.2; }
+            100% { transform: translateY(calc(100vh + 120px)) rotate(-360deg) scale(0.9); opacity: 0; }
+        }
+
+        @keyframes fall-tilt {
+            0%   { transform: translateY(-120px) rotate(15deg) scale(1); opacity: 0; }
+            10%  { opacity: 0.3; }
+            50%  { opacity: 0.2; }
+            100% { transform: translateY(calc(100vh + 120px)) rotate(380deg) scale(1.1); opacity: 0; }
+        }
+
+        /* --- Chains with random offsets, sizes, speeds, and animations --- */
         .chain-link:nth-child(1) {
-            left: 10%;
+            left: 5%;
+            font-size: 3.5rem;
+            animation: fall-cw 9s linear infinite;
             animation-delay: 0s;
-            animation-duration: 9s; /* Varying durations for a less uniform look */
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255,255,255,0.35);
         }
         .chain-link:nth-child(2) {
-            left: 25%;
-            animation-delay: 2s;
-            animation-duration: 8s;
-            color: rgba(255, 255, 255, 0.234);
+            left: 18%;
+            font-size: 2.3rem;
+            animation: fall-ccw 10s linear infinite;
+            animation-delay: 3s;
+            color: rgba(255,255,255,0.25);
         }
         .chain-link:nth-child(3) {
-            left: 40%;
-            animation-delay: 4s;
-            animation-duration: 7s;
-            color: rgba(255, 255, 255, 0.604);
+            left: 33%;
+            font-size: 3.9rem;
+            animation: fall-tilt 8.5s linear infinite;
+            animation-delay: 6s;
+            color: rgba(255,255,255,0.45);
         }
         .chain-link:nth-child(4) {
-            left: 55%;
-            animation-delay: 6s;
-            animation-duration: 9s;
-            color: rgba(255, 255, 255, 0.333);
+            left: 50%;
+            font-size: 2.5rem;
+            animation: fall-cw 11s linear infinite;
+            animation-delay: 2s;
+            color: rgba(255,255,255,0.3);
         }
         .chain-link:nth-child(5) {
-            left: 70%;
-            animation-delay: 8s;
-            animation-duration: 8.5s;
-            color: rgba(255, 255, 255, 0.601);
+            left: 67%;
+            font-size: 1.7rem;
+            animation: fall-ccw 9.5s linear infinite;
+            animation-delay: 5s;
+            color: rgba(255,255,255,0.55);
         }
         .chain-link:nth-child(6) {
-            left: 85%;
-            animation-delay: 10s;
-            animation-duration: 7.5s;
-            color: rgba(255, 255, 255, 0.823);
+            left: 82%;
+            font-size: 3.1rem;
+            animation: fall-tilt 8s linear infinite;
+            animation-delay: 7s;
+            color: rgba(255,255,255,0.4);
         }
+
+
 
         /* --- Header & Navigation --- */
         header {
@@ -227,7 +239,7 @@
 
         /* --- Hero Section --- */
         .hero {
-            background: linear-gradient(135deg, rgba(30,60,114,0.9), rgba(42,82,152,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><circle fill="%23e1ecf4" cx="200" cy="150" r="80"/><circle fill="%23d1e7dd" cx="800" cy="300" r="120"/><circle fill="%23fff3cd" cx="1000" cy="100" r="60"/></svg>');
+            background: linear-gradient(135deg, rgba(30,60,114,0.8), rgba(42,82,152,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><circle fill="%23e1ecf4" cx="200" cy="150" r="80"/><circle fill="%23d1e7dd" cx="800" cy="300" r="120"/><circle fill="%23fff3cd" cx="1000" cy="100" r="60"/></svg>');
             background-size: cover;
             background-position: center;
             color: white;
@@ -239,6 +251,18 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .hero-shadow{
+            text-shadow: 
+                1.2px 1.2px 0 #1e3c72,  /* bottom-right */
+            -1.2px 1.2px 0 #1e3c72,  /* bottom-left */
+                1.2px -1.2px 0 #1e3c72, /* top-right */
+            -1.2px -1.2px 0 #1e3c72; /* top-left */
+        }
+
+        .hero-gold{
+            color: #ffd700;
         }
 
         .hero::before {
@@ -522,7 +546,7 @@
             margin-bottom: 15px;
         }
         .benefit-card-front p, .benefit-card-back p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #555;
             line-height: 1.6;
         }
@@ -705,10 +729,6 @@
             <i class="fas fa-link chain-link"></i>
             <i class="fas fa-link chain-link"></i>
             <i class="fas fa-link chain-link"></i>
-            <i class="fas fa-link chain-link"></i>
-            <i class="fas fa-link chain-link"></i>
-            <i class="fas fa-link chain-link"></i>
-            <i class="fas fa-link chain-link"></i>
         </div>
         <nav class="container">
             <div class="logo" style="display:flex; align-items:center; gap:10px;">
@@ -740,7 +760,7 @@
             padding:40px;">
         <div class="container hero-content fade-in">
             <h1>Do you pay too much on your debt?</h1>
-            <p>Find out with Freedom Debt Consulting how much cash flow you can unlock and save. Get debt free in 60 months or less!</p>
+            <p class="hero-shadow">Find out with <span class="hero-gold">Freedom Debt Consulting</span> how much cash flow you can unlock and save. Get debt free in 60 months or less!</p>
             <a href="#contact" class="cta-button pulse">Start Your Debt Free Journey Now</a>
         </div>
     </section>
