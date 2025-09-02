@@ -148,24 +148,29 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
+        /* Logo text responsive */
+        .logo span {
+            font-size: clamp(1rem, 2.5vw, 2rem); /* scales with viewport */
             font-weight: bold;
-            color: #fff;
+            white-space: nowrap;
         }
 
+        /* Nav links responsive (never wrap, shrink instead) */
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: clamp(0.8rem, 2vw, 2rem); /* gap also scales */
+            flex-wrap: nowrap; /* no wrapping */
         }
 
         .nav-links a {
+            font-size: clamp(0.7rem, 1.2vw, 1rem); /* shrink text responsively */
             color: white;
             text-decoration: none;
             font-weight: 500;
             position: relative;
             transition: color 0.3s ease;
+            white-space: nowrap; /* keep on one line */
         }
 
         .nav-links a::after {
@@ -643,7 +648,9 @@
             margin-top: 30px;
         }
 
-           /* --- Mobile Responsiveness --- */
+
+        
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             .nav-toggle {
                 display: block;
@@ -689,29 +696,6 @@
             .hero-content p { 
                 font-size: 1.1rem; 
             }
-
-            .tabs-container {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .tab-buttons {
-                flex-direction: column;
-                border-bottom: none;
-            }
-            .tab-button {
-                border-bottom: none;
-                border-radius: 5px;
-                background: #f8f9fa;
-                color: #333;
-                margin-bottom: 10px;
-            }
-            .tab-button.active {
-                background: #1e3c72;
-                color: white;
-                border-bottom: none;
-            }
-        }
     </style>
 </head>
 <body>
@@ -729,7 +713,7 @@
         <nav class="container">
             <div class="logo" style="display:flex; align-items:center; gap:10px;">
                 <img src="fdslogo.png" alt="Freedom Debt Consulting Logo" style="height:60px; width:auto;">
-                <span style="font-size:30px; font-weight:bold;">FREEDOM DEBT CONSULTING</span>
+                <span style="font-weight:bold;">FREEDOM DEBT CONSULTING</span>
             </div>
 
             <ul class="nav-links">
